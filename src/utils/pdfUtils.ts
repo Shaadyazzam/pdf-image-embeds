@@ -2,9 +2,11 @@
 import * as pdfjsLib from 'pdfjs-dist';
 import { toast } from "sonner";
 
-// Set worker path to local bundle
-const pdfjsWorker = await import('pdfjs-dist/build/pdf.worker.mjs');
-pdfjsLib.GlobalWorkerOptions.workerPort = new pdfjsWorker.PDFWorker();
+// Set worker path to worker URL
+pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.mjs',
+  import.meta.url
+).toString();
 
 // Convert a PDF file to an array of base64 image strings
 export const convertPdfToBase64Images = async (
