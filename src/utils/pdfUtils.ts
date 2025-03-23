@@ -1,9 +1,13 @@
 
 import * as pdfjsLib from 'pdfjs-dist';
 import { toast } from "sonner";
+import { PDFWorker } from 'pdfjs-dist/build/pdf.worker.mjs';
 
-// Configure the worker source - use a more reliable CDN URL format
-pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.js`;
+// Configure the worker source with a bundled worker approach
+pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.mjs',
+  import.meta.url
+).toString();
 
 // Convert a PDF file to an array of base64 image strings
 export const convertPdfToBase64Images = async (
