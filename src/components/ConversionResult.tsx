@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import ImagePreview from './ImagePreview';
@@ -52,43 +51,38 @@ const ConversionResult: React.FC<ConversionResultProps> = ({ images, onReset }) 
         </Button>
       </div>
       
-      <Tabs defaultValue="preview" className="w-full">
-        <TabsList className="grid w-full max-w-md mx-auto grid-cols-2">
-          <TabsTrigger value="preview">Image Preview</TabsTrigger>
-          <TabsTrigger value="html">HTML Embed Code</TabsTrigger>
-        </TabsList>
+      {/* Image Preview Section */}
+      <div className="mb-8">
+        <ImagePreview images={images} onCopyAll={copyAllImages} />
+      </div>
+      
+      <Separator className="my-6" />
+      
+      {/* HTML Embed Code Section */}
+      <div className="animate-fade-up">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-xl font-medium">HTML for Email</h3>
+          <Button variant="default" onClick={copyHtml}>
+            Copy HTML
+          </Button>
+        </div>
         
-        <Separator className="my-6" />
+        <div className="mt-4 p-4 rounded-lg border bg-card overflow-hidden">
+          <pre className="max-h-96 overflow-y-auto text-sm text-muted-foreground font-mono whitespace-pre-wrap">
+            {htmlOutput}
+          </pre>
+        </div>
         
-        <TabsContent value="preview">
-          <ImagePreview images={images} onCopyAll={copyAllImages} />
-        </TabsContent>
-        
-        <TabsContent value="html" className="animate-fade-up">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-xl font-medium">HTML for Email</h3>
-            <Button variant="default" onClick={copyHtml}>
-              Copy HTML
-            </Button>
-          </div>
-          
-          <div className="mt-4 p-4 rounded-lg border bg-card overflow-hidden">
-            <pre className="max-h-96 overflow-y-auto text-sm text-muted-foreground font-mono whitespace-pre-wrap">
-              {htmlOutput}
-            </pre>
-          </div>
-          
-          <div className="mt-6 p-4 rounded-lg border bg-secondary/50">
-            <h4 className="text-sm font-medium mb-2">How to use:</h4>
-            <ol className="list-decimal list-inside text-sm text-muted-foreground space-y-2">
-              <li>Copy the HTML code above</li>
-              <li>Paste it into your email composer in HTML mode</li>
-              <li>Images will be directly embedded in your email</li>
-              <li>No need to attach files or host images separately</li>
-            </ol>
-          </div>
-        </TabsContent>
-      </Tabs>
+        <div className="mt-6 p-4 rounded-lg border bg-secondary/50">
+          <h4 className="text-sm font-medium mb-2">How to use:</h4>
+          <ol className="list-decimal list-inside text-sm text-muted-foreground space-y-2">
+            <li>Copy the HTML code above</li>
+            <li>Paste it into your email composer in HTML mode</li>
+            <li>Images will be directly embedded in your email</li>
+            <li>No need to attach files or host images separately</li>
+          </ol>
+        </div>
+      </div>
     </div>
   );
 };
