@@ -135,17 +135,6 @@ const Index: React.FC = () => {
                 <p className="text-xs text-muted-foreground">
                   All processing happens in your browser. Files are not uploaded to any server.
                 </p>
-                
-                <Button variant="ghost" size="sm" asChild>
-                  <a 
-                    href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-xs"
-                  >
-                    Learn more about base64 encoding
-                  </a>
-                </Button>
               </div>
             </div>
           </div>
