@@ -31,17 +31,6 @@ const ConversionResult: React.FC<ConversionResultProps> = ({ images, onReset }) 
       });
   };
   
-  const copyAllImages = () => {
-    navigator.clipboard.writeText(images.join('\n\n'))
-      .then(() => {
-        toast.success('All images copied to clipboard');
-      })
-      .catch((err) => {
-        console.error('Failed to copy: ', err);
-        toast.error('Failed to copy to clipboard');
-      });
-  };
-  
   return (
     <div className="w-full max-w-5xl mx-auto mt-8 animate-fade-up">
       <div className="flex items-center justify-between mb-6">
@@ -51,18 +40,13 @@ const ConversionResult: React.FC<ConversionResultProps> = ({ images, onReset }) 
         </Button>
       </div>
       
-      {/* Image Preview Section with Both Copy Buttons */}
+      {/* Image Preview Section with Copy HTML Button */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-medium">Preview ({images.length} {images.length === 1 ? 'image' : 'images'})</h2>
-          <div className="flex space-x-3">
-            <Button variant="default" onClick={copyHtml}>
-              Copy HTML
-            </Button>
-            <Button variant="secondary" onClick={copyAllImages}>
-              Copy All Images
-            </Button>
-          </div>
+          <Button variant="default" onClick={copyHtml}>
+            Copy HTML
+          </Button>
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
