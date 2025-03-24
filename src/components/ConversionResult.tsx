@@ -73,45 +73,25 @@ const ConversionResult: React.FC<ConversionResultProps> = ({ images, onReset }) 
                 </div>
               </div>
               <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 hover:opacity-100 transition-opacity">
-                <div className="flex flex-col space-y-2">
-                  <Button 
-                    variant="secondary" 
-                    size="sm"
-                    className="text-xs"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      navigator.clipboard.writeText(base64)
-                        .then(() => {
-                          toast.success(`Copied image ${index + 1} to clipboard`);
-                        })
-                        .catch((err) => {
-                          console.error('Failed to copy: ', err);
-                          toast.error('Failed to copy to clipboard');
-                        });
-                    }}
-                  >
-                    Copy Image
-                  </Button>
-                  <Button 
-                    variant="secondary" 
-                    size="sm"
-                    className="text-xs"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      const singleHtml = generateSingleImageHtml(base64, index);
-                      navigator.clipboard.writeText(singleHtml)
-                        .then(() => {
-                          toast.success(`Copied HTML for image ${index + 1}`);
-                        })
-                        .catch((err) => {
-                          console.error('Failed to copy: ', err);
-                          toast.error('Failed to copy HTML');
-                        });
-                    }}
-                  >
-                    Copy HTML
-                  </Button>
-                </div>
+                <Button 
+                  variant="secondary" 
+                  size="sm"
+                  className="text-xs"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const singleHtml = generateSingleImageHtml(base64, index);
+                    navigator.clipboard.writeText(singleHtml)
+                      .then(() => {
+                        toast.success(`Copied HTML for image ${index + 1}`);
+                      })
+                      .catch((err) => {
+                        console.error('Failed to copy: ', err);
+                        toast.error('Failed to copy HTML');
+                      });
+                  }}
+                >
+                  Copy HTML
+                </Button>
               </div>
             </div>
           ))}
